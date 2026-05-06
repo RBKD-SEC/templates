@@ -11,9 +11,12 @@
 ```text
 .
 ├── workflows/               # 工作流入口
-│   ├── internal-full-safe.yaml
-│   ├── web-services.yaml
-│   └── network-services.yaml
+│   ├── internal-full-safe.yaml     # 默认 safe 扫描
+│   ├── web-services.yaml           # Web 服务 safe
+│   ├── network-services.yaml       # 网络服务 safe
+│   ├── devops.yaml                 # DevOps 专项（含 optional）
+│   ├── middleware.yaml             # 中间件专项（含 optional）
+│   └── panels.yaml                 # 监控面板专项（含 optional）
 ├── fingerprints/            # 指纹识别模板
 │   ├── http/
 │   └── network/
@@ -75,6 +78,15 @@ nuclei -l web-targets.txt -t workflows/web-services.yaml -j -o results/web.json
 # 网络服务专项
 nuclei -l network-targets.txt -t workflows/network-services.yaml -j -o results/network.json
 
+# DevOps 专项（含 optional 登录爆破，慎用）
+nuclei -l devops-targets.txt -t workflows/devops.yaml -j -o results/devops.json
+
+# 中间件专项（含 optional 登录爆破，慎用）
+nuclei -l middleware-targets.txt -t workflows/middleware.yaml -j -o results/middleware.json
+
+# 监控面板专项（含 optional 登录爆破，慎用）
+nuclei -l panels-targets.txt -t workflows/panels.yaml -j -o results/panels.json
+
 # 验证全部模板语法
 nuclei -validate -t .
 ```
@@ -98,14 +110,12 @@ nuclei -t ./network/no-auth/redis-no-auth.yaml -u <target>:6379 -o redis_unauth.
 
 | 服务族 | 指纹 | Safe 风险 | Optional 风险 |
 |--------|------|-----------|---------------|
-| 中间件 | Tomcat, Spring Boot, Nginx, Apache | Actuator, Swagger, .git, Server Status, Directory Listing | — |
-| DevOps | Jenkins, GitLab, Nexus, Harbor | Swagger, Jolokia | — |
-| 监控面板 | Grafana, Kibana, Prometheus | Prometheus Metrics | — |
-| 数据库 | Redis, MySQL, PostgreSQL, MongoDB, Elasticsearch, MSSQL, ZooKeeper, Memcached | 未授权、匿名访问 | — |
-| 网络协议 | SSH, FTP, SMB, Telnet, RDP, Rsync, SNMP | 匿名登录、Null Session、Public Community | Mini Brute |
+| 中间件 | Tomcat, Spring Boot, Nginx, Apache | Actuator, Swagger, .git, Server Status, Directory Listing | Tomcat Manager Mini Brute |
+| DevOps | Jenkins, GitLab, Nexus, Harbor | Swagger, Jolokia | Jenkins / Nexus / Harbor Mini Brute |
+| 监控面板 | Grafana, Kibana, Prometheus | Prometheus Metrics | Grafana Mini Brute |
+| 数据库 | Redis, MySQL, PostgreSQL, MongoDB, Elasticsearch, MSSQL, ZooKeeper, Memcached | 未授权、匿名访问 | phpMyAdmin Mini Brute |
+| 网络协议 | SSH, FTP, SMB, Telnet, RDP, Rsync, SNMP | 匿名登录、Null Session、Public Community | SSH / FTP Mini Brute |
 | Web 通用 | Druid, PHP | 监控暴露、phpinfo | — |
-
-> Web 表单登录爆破（Tomcat Manager / Jenkins / Grafana 等）**本轮延后**，第二轮根据实际需求补充 mini-brute 版本，且仅进入 optional 工作流。
 
 ## 扫描政策
 

@@ -16,7 +16,8 @@ tomcat:
   checks:
     safe:
       - http/exposures/git-config-exposed.yaml
-    optional: []
+    optional:
+      - http/default-logins/tomcat-manager-mini-brute.yaml
   tags: [middleware, web]
 
 spring-boot:
@@ -37,7 +38,8 @@ jenkins:
   checks:
     safe:
       - http/exposures/swagger-ui-exposed.yaml
-    optional: []
+    optional:
+      - http/default-logins/jenkins-mini-brute.yaml
   tags: [devops, ci, web]
 
 grafana:
@@ -46,7 +48,8 @@ grafana:
     - fingerprints/http/panels/grafana-detect.yaml
   checks:
     safe: []
-    optional: []
+    optional:
+      - http/default-logins/grafana-mini-brute.yaml
   tags: [panels, monitoring, web]
 
 kibana:
@@ -83,7 +86,8 @@ nexus:
     - fingerprints/http/devops/nexus-detect.yaml
   checks:
     safe: []
-    optional: []
+    optional:
+      - http/default-logins/nexus-mini-brute.yaml
   tags: [devops, web]
 
 harbor:
@@ -92,7 +96,8 @@ harbor:
     - fingerprints/http/devops/harbor-detect.yaml
   checks:
     safe: []
-    optional: []
+    optional:
+      - http/default-logins/harbor-mini-brute.yaml
   tags: [devops, web]
 
 nginx:
@@ -275,7 +280,8 @@ php:
   checks:
     safe:
       - http/exposures/phpinfo-exposed.yaml
-    optional: []
+    optional:
+      - http/default-logins/phpmyadmin-mini-brute.yaml
   tags: [web]
 
 jolokia:
