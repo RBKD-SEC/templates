@@ -1,0 +1,30 @@
+id: ruijie-detect
+
+info:
+  name: Ruijie Network Device Detect
+  author: internal-audit
+  severity: info
+  description: Detects Ruijie network device web management interface.
+  metadata:
+    max-request: 1
+  tags: fingerprint,http,ruijie,network-device,internal-audit
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/login.asp"
+      - "{{BaseURL}}/"
+    stop-at-first-match: true
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 200
+
+      - type: word
+        part: body
+        words:
+          - "Ruijie"
+          - "RG-"
+          - "StarNOS"
+        condition: or

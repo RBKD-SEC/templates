@@ -450,3 +450,255 @@ h3c:
     optional:
       - http/default-logins/h3c-mini-brute.yaml
   tags: [network-device]
+
+# ─── 国产网络/安全设备 ───
+
+huawei:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/network-devices/huawei-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/huawei-mini-brute.yaml
+  tags: [network-device]
+
+ruijie:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/network-devices/ruijie-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/ruijie-mini-brute.yaml
+  tags: [network-device]
+
+sangfor:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/network-devices/sangfor-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/sangfor-mini-brute.yaml
+  tags: [network-device]
+
+topsec:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/network-devices/topsec-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/topsec-mini-brute.yaml
+  tags: [network-device]
+
+qianxin:
+  ports: [8443]
+  fingerprint:
+    - fingerprints/http/network-devices/qianxin-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/qianxin-mini-brute.yaml
+  tags: [network-device]
+
+venustech:
+  ports: [8443]
+  fingerprint:
+    - fingerprints/http/network-devices/venustech-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/venustech-mini-brute.yaml
+  tags: [network-device]
+
+nsfocus:
+  ports: [443]
+  fingerprint:
+    - fingerprints/http/network-devices/nsfocus-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/nsfocus-mini-brute.yaml
+  tags: [network-device]
+
+# ─── 国产中间件 ───
+
+tongweb:
+  ports: [8088]
+  fingerprint:
+    - fingerprints/http/middleware/tongweb-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/tongweb-mini-brute.yaml
+  tags: [middleware, web]
+
+bes:
+  ports: [8080]
+  fingerprint:
+    - fingerprints/http/middleware/bes-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/bes-mini-brute.yaml
+  tags: [middleware, web]
+
+apusic:
+  ports: [6888]
+  fingerprint:
+    - fingerprints/http/middleware/apusic-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/apusic-mini-brute.yaml
+  tags: [middleware, web]
+
+# ─── 国产数据库 ───
+
+dameng:
+  ports: [5236]
+  fingerprint:
+    - fingerprints/network/dameng-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [database]
+
+kingbase:
+  ports: [54321]
+  fingerprint:
+    - fingerprints/network/kingbase-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - network/default-logins/kingbase-mini-brute.yaml
+  tags: [database]
+
+oscar:
+  ports: [2003]
+  fingerprint:
+    - fingerprints/network/oscar-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [database]
+
+# ─── ICS 协议 ───
+
+modbus:
+  ports: [502]
+  fingerprint:
+    - fingerprints/network/ics/modbus-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [ics, protocol]
+
+iec104:
+  ports: [2404]
+  fingerprint:
+    - fingerprints/network/ics/iec104-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [ics, protocol]
+
+s7comm:
+  ports: [102]
+  fingerprint:
+    - fingerprints/network/ics/s7comm-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [ics, protocol]
+
+dnp3:
+  ports: [20000]
+  fingerprint:
+    - fingerprints/network/ics/dnp3-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [ics, protocol]
+
+codesys:
+  ports: [1200]
+  fingerprint:
+    - fingerprints/network/ics/codesys-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [ics, protocol]
+
+mms:
+  ports: [102]
+  fingerprint:
+    - fingerprints/network/ics/mms-detect.yaml
+  checks:
+    safe: []
+    optional: []
+  tags: [ics, protocol]
+
+# ─── ICS 厂商 Web ───
+
+siemens:
+  ports: [443]
+  fingerprint:
+    - fingerprints/http/ics/siemens-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/siemens-mini-brute.yaml
+  tags: [ics]
+
+schneider:
+  ports: [80]
+  fingerprint:
+    - fingerprints/http/ics/schneider-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/schneider-mini-brute.yaml
+  tags: [ics]
+
+abb:
+  ports: [80]
+  fingerprint:
+    - fingerprints/http/ics/abb-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/abb-mini-brute.yaml
+  tags: [ics]
+
+rockwell:
+  ports: [80]
+  fingerprint:
+    - fingerprints/http/ics/rockwell-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/rockwell-mini-brute.yaml
+  tags: [ics]
+
+ge:
+  ports: [80]
+  fingerprint:
+    - fingerprints/http/ics/ge-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/ge-mini-brute.yaml
+  tags: [ics]
+
+omron:
+  ports: [80]
+  fingerprint:
+    - fingerprints/http/ics/omron-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/omron-mini-brute.yaml
+  tags: [ics]

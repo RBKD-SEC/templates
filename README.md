@@ -20,10 +20,20 @@
 │   ├── panels.yaml                 # 监控面板专项（含 optional）
 │   ├── cloud-native.yaml           # 云原生专项（含 optional）
 │   ├── cameras.yaml                # 摄像头专项（含 optional）
-│   └── network-devices.yaml        # 网络设备专项（含 optional）
+│   ├── network-devices.yaml        # 网络设备专项（含 optional）
+│   ├── domestic-devices.yaml       # 国产设备专项（含 optional）
+│   ├── domestic-software.yaml      # 国产中间件/数据库专项（含 optional）
+│   └── ics.yaml                    # ICS/SCADA 专项（含 optional）
 ├── fingerprints/            # 指纹识别模板
 │   ├── http/
+│   │   ├── middleware/
+│   │   ├── devops/
+│   │   ├── panels/
+│   │   ├── cameras/
+│   │   ├── network-devices/
+│   │   └── ics/
 │   └── network/
+│       └── ics/
 ├── http/                    # HTTP 协议风险模板
 │   ├── exposures/           # 敏感暴露
 │   ├── misconfig/           # 错误配置
@@ -103,6 +113,15 @@ nuclei -l camera-targets.txt -t workflows/cameras.yaml -j -o results/cameras.jso
 # 网络设备专项（含 optional 登录爆破，慎用）
 nuclei -l device-targets.txt -t workflows/network-devices.yaml -j -o results/network-devices.json
 
+# 国产设备专项（含 optional 登录爆破，慎用）
+nuclei -l domestic-device-targets.txt -t workflows/domestic-devices.yaml -j -o results/domestic-devices.json
+
+# 国产中间件/数据库专项（含 optional 登录爆破，慎用）
+nuclei -l domestic-sw-targets.txt -t workflows/domestic-software.yaml -j -o results/domestic-software.json
+
+# ICS/SCADA 专项（含 optional 登录爆破，慎用）
+nuclei -l ics-targets.txt -t workflows/ics.yaml -j -o results/ics.json
+
 # 验证全部模板语法
 nuclei -validate -t .
 ```
@@ -133,7 +152,11 @@ nuclei -t ./network/no-auth/redis-no-auth.yaml -u <target>:6379 -o redis_unauth.
 | 网络协议 | SSH, FTP, SMB, Telnet, RDP, Rsync, SNMP | 匿名登录、Null Session、Public Community | SSH / FTP Mini Brute |
 | 云原生 | — | Docker Registry, K8s API, Docker API, etcd, Consul | RabbitMQ / ActiveMQ Mini Brute |
 | 摄像头 | 海康威视, 大华 | — | 海康 / 大华 Mini Brute |
-| 网络设备 | H3C | — | H3C Mini Brute |
+| 网络设备 | H3C, 华为, 锐捷, 深信服, 天融信, 奇安信, 启明星辰, 绿盟 | — | H3C / 华为 / 锐捷 / 深信服 / 天融信 / 奇安信 / 启明星辰 / 绿盟 Mini Brute |
+| 国产中间件 | 东方通 TongWeb, 宝兰德 BES, 金蝶 Apusic | — | TongWeb / BES / Apusic Mini Brute |
+| 国产数据库 | 达梦 DM, 人大金仓 KingBase, 神通 OSCAR | — | KingBase Mini Brute |
+| ICS 协议 | Modbus, IEC 104, S7comm, DNP3, CODESYS, MMS | — | — |
+| ICS 设备 | Siemens, Schneider, ABB, Rockwell, GE, Omron | — | Siemens / Schneider / ABB / Rockwell / GE / Omron Mini Brute |
 | Web 通用 | — | 监控暴露、phpinfo | — |
 
 ## 扫描政策
