@@ -15,6 +15,7 @@ jobs:
       - name: Install Nuclei
         run: |
           go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
           nuclei -version
 
       - name: Validate templates
