@@ -1,0 +1,28 @@
+id: etcd-unauth
+
+info:
+  name: etcd Unauthenticated Access
+  author: internal-audit
+  severity: critical
+  description: Detects etcd server allowing unauthenticated read access to all keys.
+  metadata:
+    max-request: 1
+  tags: http,exposure,etcd,internal-audit,safe
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v2/keys"
+    stop-at-first-match: true
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"node"'
+          - '"key"'
+        condition: and
+
+      - type: status
+        status:
+          - 200
+        condition: and

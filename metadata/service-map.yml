@@ -121,6 +121,47 @@ apache:
     optional: []
   tags: [middleware, web]
 
+weblogic:
+  ports: [7001, 7002]
+  fingerprint:
+    - fingerprints/http/middleware/weblogic-detect.yaml
+  checks:
+    safe:
+      - http/exposures/weblogic-console-exposed.yaml
+    optional: []
+  tags: [middleware, web]
+
+jboss:
+  ports: [8080, 9990]
+  fingerprint:
+    - fingerprints/http/middleware/jboss-detect.yaml
+  checks:
+    safe:
+      - http/exposures/jboss-jmx-console-exposed.yaml
+    optional: []
+  tags: [middleware, web]
+
+kafka:
+  ports: [9092, 8083]
+  fingerprint:
+    - fingerprints/http/middleware/kafka-detect.yaml
+  checks:
+    safe:
+      - http/exposures/kafka-connect-exposed.yaml
+      - network/no-auth/kafka-unauth.yaml
+    optional: []
+  tags: [middleware, streaming]
+
+rocketmq:
+  ports: [8080, 9876]
+  fingerprint:
+    - fingerprints/http/middleware/rocketmq-detect.yaml
+  checks:
+    safe:
+      - http/exposures/rocketmq-console-exposed.yaml
+    optional: []
+  tags: [middleware, streaming]
+
 redis:
   ports: [6379]
   fingerprint:
@@ -128,7 +169,8 @@ redis:
   checks:
     safe:
       - network/no-auth/redis-no-auth.yaml
-    optional: []
+    optional:
+      - network/default-logins/redis-acl-mini-brute.yaml
   tags: [database, cache]
 
 mysql:
@@ -137,7 +179,8 @@ mysql:
     - fingerprints/network/mysql-detect.yaml
   checks:
     safe: []
-    optional: []
+    optional:
+      - network/default-logins/mysql-mini-brute.yaml
   tags: [database]
 
 postgres:
@@ -146,7 +189,8 @@ postgres:
     - fingerprints/network/postgres-detect.yaml
   checks:
     safe: []
-    optional: []
+    optional:
+      - network/default-logins/postgres-mini-brute.yaml
   tags: [database]
 
 mssql:
@@ -155,7 +199,8 @@ mssql:
     - fingerprints/network/mssql-detect.yaml
   checks:
     safe: []
-    optional: []
+    optional:
+      - network/default-logins/mssql-mini-brute.yaml
   tags: [database]
 
 ssh:
@@ -292,3 +337,116 @@ jolokia:
       - http/exposures/jolokia-exposed.yaml
     optional: []
   tags: [middleware, web]
+
+docker-registry:
+  ports: [5000]
+  fingerprint: []
+  checks:
+    safe:
+      - http/exposures/docker-registry-exposed.yaml
+    optional: []
+  tags: [cloud-native, registry]
+
+kubernetes:
+  ports: [6443, 8080]
+  fingerprint: []
+  checks:
+    safe:
+      - http/exposures/kubernetes-api-unauth.yaml
+    optional: []
+  tags: [cloud-native, orchestration]
+
+docker-api:
+  ports: [2375, 2376]
+  fingerprint: []
+  checks:
+    safe:
+      - http/exposures/docker-api-unauth.yaml
+    optional: []
+  tags: [cloud-native, runtime]
+
+etcd:
+  ports: [2379, 2380]
+  fingerprint: []
+  checks:
+    safe:
+      - http/exposures/etcd-unauth.yaml
+    optional: []
+  tags: [cloud-native, kv]
+
+consul:
+  ports: [8500]
+  fingerprint: []
+  checks:
+    safe:
+      - http/exposures/consul-unauth.yaml
+    optional: []
+  tags: [cloud-native, service-mesh]
+
+rabbitmq:
+  ports: [15672]
+  fingerprint: []
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/rabbitmq-mini-brute.yaml
+  tags: [cloud-native, message-queue]
+
+activemq:
+  ports: [8161]
+  fingerprint: []
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/activemq-mini-brute.yaml
+  tags: [cloud-native, message-queue]
+
+zabbix:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/panels/zabbix-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/zabbix-mini-brute.yaml
+  tags: [panels, monitoring, web]
+
+minio:
+  ports: [9000, 9001]
+  fingerprint:
+    - fingerprints/http/panels/minio-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/minio-mini-brute.yaml
+  tags: [panels, storage, web]
+
+hikvision:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/cameras/hikvision-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/hikvision-mini-brute.yaml
+  tags: [camera, network-device]
+
+dahua:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/cameras/dahua-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/dahua-mini-brute.yaml
+  tags: [camera, network-device]
+
+h3c:
+  ports: [80, 443]
+  fingerprint:
+    - fingerprints/http/network-devices/h3c-detect.yaml
+  checks:
+    safe: []
+    optional:
+      - http/default-logins/h3c-mini-brute.yaml
+  tags: [network-device]

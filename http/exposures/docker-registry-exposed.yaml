@@ -1,0 +1,26 @@
+id: docker-registry-exposed
+
+info:
+  name: Docker Registry Exposed
+  author: internal-audit
+  severity: medium
+  description: Detects exposed Docker Registry V2 API allowing unauthenticated image enumeration.
+  metadata:
+    max-request: 1
+  tags: http,exposure,docker,registry,internal-audit,safe
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v2/_catalog"
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"repositories"'
+
+      - type: word
+        part: header
+        words:
+          - "application/json"
+        condition: and

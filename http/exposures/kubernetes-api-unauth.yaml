@@ -1,0 +1,27 @@
+id: kubernetes-api-unauth
+
+info:
+  name: Kubernetes API Unauthenticated Access
+  author: internal-audit
+  severity: high
+  description: Detects Kubernetes API server allowing unauthenticated access to namespace listing.
+  metadata:
+    max-request: 1
+  tags: http,exposure,kubernetes,k8s,internal-audit,safe
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/v1/namespaces"
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"kind":"NamespaceList"'
+          - '"items"'
+        condition: and
+
+      - type: status
+        status:
+          - 200
+        condition: and

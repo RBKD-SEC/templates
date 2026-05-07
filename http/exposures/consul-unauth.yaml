@@ -1,0 +1,27 @@
+id: consul-unauth
+
+info:
+  name: Consul Unauthenticated Access
+  author: internal-audit
+  severity: high
+  description: Detects Consul API exposed without authentication allowing service enumeration.
+  metadata:
+    max-request: 1
+  tags: http,exposure,consul,internal-audit,safe
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v1/agent/services"
+    matchers:
+      - type: word
+        part: body
+        words:
+          - '"Service"'
+          - '"ID"'
+        condition: and
+
+      - type: status
+        status:
+          - 200
+        condition: and

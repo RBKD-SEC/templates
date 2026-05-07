@@ -14,9 +14,13 @@
 │   ├── internal-full-safe.yaml     # 默认 safe 扫描
 │   ├── web-services.yaml           # Web 服务 safe
 │   ├── network-services.yaml       # 网络服务 safe
+│   ├── databases.yaml              # 数据库专项（含 optional）
 │   ├── devops.yaml                 # DevOps 专项（含 optional）
 │   ├── middleware.yaml             # 中间件专项（含 optional）
-│   └── panels.yaml                 # 监控面板专项（含 optional）
+│   ├── panels.yaml                 # 监控面板专项（含 optional）
+│   ├── cloud-native.yaml           # 云原生专项（含 optional）
+│   ├── cameras.yaml                # 摄像头专项（含 optional）
+│   └── network-devices.yaml        # 网络设备专项（含 optional）
 ├── fingerprints/            # 指纹识别模板
 │   ├── http/
 │   └── network/
@@ -87,6 +91,18 @@ nuclei -l middleware-targets.txt -t workflows/middleware.yaml -j -o results/midd
 # 监控面板专项（含 optional 登录爆破，慎用）
 nuclei -l panels-targets.txt -t workflows/panels.yaml -j -o results/panels.json
 
+# 数据库专项（含 optional 登录爆破，慎用）
+nuclei -l db-targets.txt -t workflows/databases.yaml -j -o results/databases.json
+
+# 云原生专项（含 optional 登录爆破，慎用）
+nuclei -l k8s-targets.txt -t workflows/cloud-native.yaml -j -o results/cloud-native.json
+
+# 摄像头专项（含 optional 登录爆破，慎用）
+nuclei -l camera-targets.txt -t workflows/cameras.yaml -j -o results/cameras.json
+
+# 网络设备专项（含 optional 登录爆破，慎用）
+nuclei -l device-targets.txt -t workflows/network-devices.yaml -j -o results/network-devices.json
+
 # 验证全部模板语法
 nuclei -validate -t .
 ```
@@ -110,12 +126,15 @@ nuclei -t ./network/no-auth/redis-no-auth.yaml -u <target>:6379 -o redis_unauth.
 
 | 服务族 | 指纹 | Safe 风险 | Optional 风险 |
 |--------|------|-----------|---------------|
-| 中间件 | Tomcat, Spring Boot, Nginx, Apache | Actuator, Swagger, .git, Server Status, Directory Listing | Tomcat Manager Mini Brute |
+| 中间件 | Tomcat, Spring Boot, Nginx, Apache, WebLogic, JBoss, Kafka, RocketMQ | Actuator, Swagger, .git, Server Status, Directory Listing, Kafka Connect, JMX Console | Tomcat Manager Mini Brute |
 | DevOps | Jenkins, GitLab, Nexus, Harbor | Swagger, Jolokia | Jenkins / Nexus / Harbor Mini Brute |
-| 监控面板 | Grafana, Kibana, Prometheus | Prometheus Metrics | Grafana Mini Brute |
-| 数据库 | Redis, MySQL, PostgreSQL, MongoDB, Elasticsearch, MSSQL, ZooKeeper, Memcached | 未授权、匿名访问 | phpMyAdmin Mini Brute |
+| 监控面板 | Grafana, Kibana, Prometheus, Zabbix, MinIO | Prometheus Metrics, Druid, phpinfo | Grafana / Zabbix / MinIO Mini Brute |
+| 数据库 | Redis, MySQL, PostgreSQL, MongoDB, Elasticsearch, MSSQL, ZooKeeper, Memcached | 未授权、匿名访问 | MySQL / PostgreSQL / MSSQL / Redis ACL / phpMyAdmin Mini Brute |
 | 网络协议 | SSH, FTP, SMB, Telnet, RDP, Rsync, SNMP | 匿名登录、Null Session、Public Community | SSH / FTP Mini Brute |
-| Web 通用 | Druid, PHP | 监控暴露、phpinfo | — |
+| 云原生 | — | Docker Registry, K8s API, Docker API, etcd, Consul | RabbitMQ / ActiveMQ Mini Brute |
+| 摄像头 | 海康威视, 大华 | — | 海康 / 大华 Mini Brute |
+| 网络设备 | H3C | — | H3C Mini Brute |
+| Web 通用 | — | 监控暴露、phpinfo | — |
 
 ## 扫描政策
 

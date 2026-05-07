@@ -1,0 +1,27 @@
+id: kafka-connect-exposed
+
+info:
+  name: Kafka Connect REST API Exposed
+  author: internal-audit
+  severity: medium
+  description: Detects exposed Kafka Connect REST API allowing connector enumeration.
+  metadata:
+    max-request: 1
+  tags: http,exposure,kafka,internal-audit,safe
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/connectors"
+    matchers:
+      - type: word
+        part: body
+        words:
+          - "["
+          - "]"
+        condition: and
+
+      - type: status
+        status:
+          - 200
+        condition: and
