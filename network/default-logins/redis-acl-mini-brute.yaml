@@ -21,7 +21,6 @@ tcp:
     attack: pitchfork
     stop-at-first-match: true
     threads: 1
-    delay: 2s
     payloads:
       password:
         - redis

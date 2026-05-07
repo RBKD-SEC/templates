@@ -20,16 +20,13 @@
 - 使用**极小字典**：最多 2 用户名 × 2 密码（4 次尝试）。
 - 必须设置 `stop-at-first-match: true`。
 - 必须设置 `threads: 1` 或低并发。
-- 必须设置 `delay` 请求间延迟：
-  - 普通模板：`delay: 2s`（每 2 秒一次尝试，4 次共 6 秒）。
-  - ICS/SCADA 模板：`delay: 5s`（每 5 秒一次尝试，4 次共 15 秒）。
 - 必须在 `info.description` 和 `metadata.max-request` 中声明最大尝试次数。
 - **不引入**外部大字典（如 rockyou、top1000）。
 - 若服务有账号锁定机制，默认不加入 `internal-full-safe.yaml`。
 
 ### 运行级防护建议
 
-除模板级 `delay` 外，运行时建议：
+nuclei 模板不支持内置请求间延迟，请求 pacing 必须在 runner 层面控制：
 
 ```bash
 # 限制每分钟总请求数（防聚合风险）

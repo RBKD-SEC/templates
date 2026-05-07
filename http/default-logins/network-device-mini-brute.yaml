@@ -21,7 +21,6 @@ http:
 
     attack: pitchfork
     threads: 1
-    delay: 2s
     stop-at-first-match: true
     payloads:
       username:

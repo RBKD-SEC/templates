@@ -43,7 +43,6 @@ info:
 attack: pitchfork
 stop-at-first-match: true
 threads: 1
-delay: 2s        # 普通模板 2s，ICS 模板 5s
 payloads:
   username:
     - admin
@@ -56,7 +55,7 @@ payloads:
 - 必须在 tags 中包含 `optional`。
 - 必须包含 `metadata.max-request`。
 - `info.description` 中写明 MAX N ATTEMPTS。
-- 必须设置 `delay`：普通模板 `delay: 2s`，ICS/SCADA 模板 `delay: 5s`。
+- nuclei 模板不支持内置 `delay`，请求 pacing 通过 runner 参数 `-rlm`/`-c` 控制。
 
 ## 6. 来源注释
 
@@ -72,6 +71,6 @@ payloads:
 - [ ] `nuclei -validate -t <文件>` 通过。
 - [ ] `id` 未与现有模板冲突。
 - [ ] tags 包含 `safe` 或 `optional`。
-- [ ] 若为弱口令模板，确认 `stop-at-first-match: true`、`threads: 1`、`delay: 2s`（ICS 用 5s）。
+- [ ] 若为弱口令模板，确认 `stop-at-first-match: true`、`threads: 1`。
 - [ ] 若引用 payload，双入口实测路径解析。
 - [ ] 不硬编码客户信息、真实密码、真实 IP。

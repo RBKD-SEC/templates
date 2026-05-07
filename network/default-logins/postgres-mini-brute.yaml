@@ -23,7 +23,6 @@ javascript:
       Password: "{{password}}"
       Database: "postgres"
     threads: 1
-    delay: 2s
     attack: pitchfork
     stop-at-first-match: true
     payloads:

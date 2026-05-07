@@ -71,7 +71,7 @@
 
 - **指纹先行**：每个服务族尽量具备指纹模板 + 风险模板 + workflow 串联。
 - **极小字典**：弱口令模板严格限制为 2 用户名 × 2 密码，最多 4 次尝试。
-- **命中即停**：所有 brute 模板均设置 `stop-at-first-match: true`、`threads: 1`、`delay`（普通 2s / ICS 5s）。
+- **命中即停**：所有 brute 模板均设置 `stop-at-first-match: true`、`threads: 1`。
 - **safe / optional 分离**：
   - `safe`：只读、无登录失败计数、不触发服务端告警。可进入默认工作流。
   - `optional`：有锁定风险、有登录失败日志。仅在服务专项工作流中显式触发。
@@ -165,8 +165,7 @@ nuclei -t ./network/no-auth/redis-no-auth.yaml -u <target>:6379 -o redis_unauth.
 
 1. 默认工作流 `internal-full-safe.yaml` **绝不包含** login brute、CVE 验证、写入型探测、Interactsh 依赖模板。
 2. 弱口令模板默认最多 **4 次尝试**，必须声明 `metadata.max-request`。
-3. 所有爆破模板必须设置 `delay` 请求间延迟（普通 ≥ 2s，ICS ≥ 5s）。
-4. 禁止硬编码客户环境信息、真实密码、真实内网 IP、真实扫描结果。
+3. 禁止硬编码客户环境信息、真实密码、真实内网 IP、真实扫描结果。
 
 ## 账号锁定风险规避
 
@@ -174,13 +173,12 @@ nuclei -t ./network/no-auth/redis-no-auth.yaml -u <target>:6379 -o redis_unauth.
 
 ### 模板内建防护
 
-| 防护措施 | 普通模板 | ICS 模板 |
-|---------|---------|---------|
-| 最大尝试次数 | 4（2 用户 × 2 密码，pitchfork） | 4 |
-| 请求间延迟 | `delay: 2s` | `delay: 5s` |
-| 单次总耗时 | ~6 秒 | ~15 秒 |
-| 命中即停 | `stop-at-first-match: true` | ✓ |
-| 单线程 | `threads: 1` | ✓ |
+| 防护措施 | 说明 |
+|---------|------|
+| 最大尝试次数 | 4（2 用户 × 2 密码，pitchfork） |
+| 命中即停 | `stop-at-first-match: true` |
+| 单线程 | `threads: 1` |
+| 请求 pacing | 模板无内置 delay，通过 runner 参数 `-rlm`/`-c` 控制 |
 
 ### 聚合风险
 
