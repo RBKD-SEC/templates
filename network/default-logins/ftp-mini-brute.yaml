@@ -9,7 +9,7 @@ info:
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: network,ftp,default-login,service,tcp,internal-audit
+  tags: network,ftp,default-login,service,tcp,internal-audit,optional
 
 tcp:
   - inputs:
@@ -21,6 +21,8 @@ tcp:
       - "{{Hostname}}"
     port: 21
     attack: pitchfork
+    threads: 1
+    delay: 2s
     stop-at-first-match: true
     payloads:
       username:

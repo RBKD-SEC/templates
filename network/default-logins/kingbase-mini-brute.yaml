@@ -24,6 +24,7 @@ javascript:
       Password: "{{password}}"
       Database: "test"
     threads: 1
+    delay: 2s
     attack: pitchfork
     stop-at-first-match: true
     payloads:

@@ -71,7 +71,7 @@
 
 - **指纹先行**：每个服务族尽量具备指纹模板 + 风险模板 + workflow 串联。
 - **极小字典**：弱口令模板严格限制为 2 用户名 × 2 密码，最多 4 次尝试。
-- **命中即停**：所有 brute 模板均设置 `stop-at-first-match: true`、`threads: 1`。
+- **命中即停**：所有 brute 模板均设置 `stop-at-first-match: true`、`threads: 1`、`delay`（普通 2s / ICS 5s）。
 - **safe / optional 分离**：
   - `safe`：只读、无登录失败计数、不触发服务端告警。可进入默认工作流。
   - `optional`：有锁定风险、有登录失败日志。仅在服务专项工作流中显式触发。
@@ -92,35 +92,35 @@ nuclei -l web-targets.txt -t workflows/web-services.yaml -j -o results/web.json
 # 网络服务专项
 nuclei -l network-targets.txt -t workflows/network-services.yaml -j -o results/network.json
 
-# DevOps 专项（含 optional 登录爆破，慎用）
-nuclei -l devops-targets.txt -t workflows/devops.yaml -j -o results/devops.json
+# DevOps 专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l devops-targets.txt -t workflows/devops.yaml -rlm 30 -j -o results/devops.json
 
-# 中间件专项（含 optional 登录爆破，慎用）
-nuclei -l middleware-targets.txt -t workflows/middleware.yaml -j -o results/middleware.json
+# 中间件专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l middleware-targets.txt -t workflows/middleware.yaml -rlm 30 -j -o results/middleware.json
 
-# 监控面板专项（含 optional 登录爆破，慎用）
-nuclei -l panels-targets.txt -t workflows/panels.yaml -j -o results/panels.json
+# 监控面板专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l panels-targets.txt -t workflows/panels.yaml -rlm 30 -j -o results/panels.json
 
-# 数据库专项（含 optional 登录爆破，慎用）
-nuclei -l db-targets.txt -t workflows/databases.yaml -j -o results/databases.json
+# 数据库专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l db-targets.txt -t workflows/databases.yaml -rlm 30 -j -o results/databases.json
 
-# 云原生专项（含 optional 登录爆破，慎用）
-nuclei -l k8s-targets.txt -t workflows/cloud-native.yaml -j -o results/cloud-native.json
+# 云原生专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l k8s-targets.txt -t workflows/cloud-native.yaml -rlm 30 -j -o results/cloud-native.json
 
-# 摄像头专项（含 optional 登录爆破，慎用）
-nuclei -l camera-targets.txt -t workflows/cameras.yaml -j -o results/cameras.json
+# 摄像头专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l camera-targets.txt -t workflows/cameras.yaml -rlm 30 -j -o results/cameras.json
 
-# 网络设备专项（含 optional 登录爆破，慎用）
-nuclei -l device-targets.txt -t workflows/network-devices.yaml -j -o results/network-devices.json
+# 网络设备专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l device-targets.txt -t workflows/network-devices.yaml -rlm 30 -j -o results/network-devices.json
 
-# 国产设备专项（含 optional 登录爆破，慎用）
-nuclei -l domestic-device-targets.txt -t workflows/domestic-devices.yaml -j -o results/domestic-devices.json
+# 国产设备专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l domestic-device-targets.txt -t workflows/domestic-devices.yaml -rlm 30 -j -o results/domestic-devices.json
 
-# 国产中间件/数据库专项（含 optional 登录爆破，慎用）
-nuclei -l domestic-sw-targets.txt -t workflows/domestic-software.yaml -j -o results/domestic-software.json
+# 国产中间件/数据库专项（含 optional 登录爆破，-rlm 限速）
+nuclei -l domestic-sw-targets.txt -t workflows/domestic-software.yaml -rlm 30 -j -o results/domestic-software.json
 
-# ICS/SCADA 专项（含 optional 登录爆破，慎用）
-nuclei -l ics-targets.txt -t workflows/ics.yaml -j -o results/ics.json
+# ICS/SCADA 专项（含 optional 登录爆破，-c 1 -rlm 10 严格限速）
+nuclei -l ics-targets.txt -t workflows/ics.yaml -c 1 -rlm 10 -j -o results/ics.json
 
 # 验证全部模板语法
 nuclei -validate -t .
@@ -165,7 +165,52 @@ nuclei -t ./network/no-auth/redis-no-auth.yaml -u <target>:6379 -o redis_unauth.
 
 1. 默认工作流 `internal-full-safe.yaml` **绝不包含** login brute、CVE 验证、写入型探测、Interactsh 依赖模板。
 2. 弱口令模板默认最多 **4 次尝试**，必须声明 `metadata.max-request`。
-3. 禁止硬编码客户环境信息、真实密码、真实内网 IP、真实扫描结果。
+3. 所有爆破模板必须设置 `delay` 请求间延迟（普通 ≥ 2s，ICS ≥ 5s）。
+4. 禁止硬编码客户环境信息、真实密码、真实内网 IP、真实扫描结果。
+
+## 账号锁定风险规避
+
+爆破模板（`*-mini-brute`）采用三层防护设计，但仍需注意聚合风险。
+
+### 模板内建防护
+
+| 防护措施 | 普通模板 | ICS 模板 |
+|---------|---------|---------|
+| 最大尝试次数 | 4（2 用户 × 2 密码，pitchfork） | 4 |
+| 请求间延迟 | `delay: 2s` | `delay: 5s` |
+| 单次总耗时 | ~6 秒 | ~15 秒 |
+| 命中即停 | `stop-at-first-match: true` | ✓ |
+| 单线程 | `threads: 1` | ✓ |
+
+### 聚合风险
+
+同一主机被多个模板命中时，总尝试次数 = 模板数 × 4。例如 6 个网络设备模板打同一台 H3C = 24 次登录尝试。nuclei 无模板间全局去重机制，需在 runner 层面控制。
+
+### 运行级防护
+
+```bash
+# 普通环境：限制每分钟总请求数
+nuclei -l targets.txt -t workflows/network-devices.yaml -rlm 30 -j -o results/network-devices.json
+
+# ICS 环境：单独运行，单线程，低速率
+nuclei -l ics-targets.txt -t workflows/ics.yaml -c 1 -rlm 10 -j -o results/ics.json
+
+# 数据库/DevOps 等含 optional 的 workflow，建议加 -rlm
+nuclei -l targets.txt -t workflows/databases.yaml -rlm 30 -j -o results/databases.json
+```
+
+| 场景 | 建议参数 | 说明 |
+|------|---------|------|
+| 普通服务 optional workflow | `-rlm 30` | 每分钟最多 30 个请求 |
+| ICS/SCADA 专项 | `-c 1 -rlm 10` | 单线程 + 每分钟 10 请求 |
+| 网络设备专项（多模板命中同一主机） | `-rlm 20` | 降低速率防聚合 |
+| 仅 safe 模板 | 无需限制 | safe 模板无登录尝试 |
+
+### 注意事项
+
+- **ICS/SCADA 设备务必单独运行**，不与普通模板混跑。工控设备对认证请求更敏感，即使 4 次也可能导致设备异常或服务中断。
+- **确认目标锁定策略**：如已知目标账号锁定阈值（如 5 次/10 分钟），应据此调整 `-rlm` 或跳过爆破。
+- **safe workflow 无风险**：`internal-full-safe.yaml` 不包含任何 `optional` 模板，可放心使用。
 
 ## 如何新增模板
 

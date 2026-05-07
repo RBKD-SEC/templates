@@ -10,7 +10,7 @@ info:
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: js,ssh,default-login,network,internal-audit
+  tags: js,ssh,default-login,network,internal-audit,optional
 
 javascript:
   - pre-condition: |
@@ -28,6 +28,7 @@ javascript:
       Username: "{{usernames}}"
       Password: "{{passwords}}"
     threads: 1
+    delay: 2s
     attack: pitchfork
     stop-at-first-match: true
     payloads:
