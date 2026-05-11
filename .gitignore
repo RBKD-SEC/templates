@@ -1,0 +1,22 @@
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Nuclei runtime artifacts
+*.json
+*.txt
+!requirements.txt
+result*/
+output*/
+
+# Temp files
+*.tmp
+*.bak
+*.log
