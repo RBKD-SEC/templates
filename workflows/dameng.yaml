@@ -8,4 +8,4 @@ info:
   tags: workflow,dameng
 
 workflows:
-  - template: network/technologies/dameng-detect.yaml
+  - template: network/detection/dameng-detect.yaml

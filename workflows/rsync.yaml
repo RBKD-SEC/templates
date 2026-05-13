@@ -8,5 +8,5 @@ info:
   tags: workflow,rsync
 
 workflows:
-  - template: network/technologies/rsync-detect.yaml
-  - template: network/misconfiguration/rsync-anonymous-list.yaml
+  - template: network/detection/rsync-detect.yaml
+  - template: network/misconfig/rsync-anonymous-list.yaml

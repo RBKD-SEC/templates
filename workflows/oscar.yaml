@@ -8,4 +8,4 @@ info:
   tags: workflow,oscar
 
 workflows:
-  - template: network/technologies/oscar-detect.yaml
+  - template: network/detection/oscar-detect.yaml

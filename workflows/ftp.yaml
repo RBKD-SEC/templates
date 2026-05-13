@@ -9,5 +9,5 @@ info:
 
 workflows:
   - template: network/detection/ftp-detect.yaml
-  - template: network/misconfiguration/ftp-anonymous-login.yaml
-  - template: network/default-logins/ftp-mini-brute.yaml
+  - template: network/misconfig/ftp-anonymous-login.yaml
+  - template: network/default-login/ftp-mini-brute.yaml

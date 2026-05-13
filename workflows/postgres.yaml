@@ -8,5 +8,5 @@ info:
   tags: workflow,postgres
 
 workflows:
-  - template: network/technologies/postgres-detect.yaml
-  - template: network/default-logins/postgres-mini-brute.yaml
+  - template: network/detection/postgres-detect.yaml
+  - template: network/default-login/postgres-mini-brute.yaml

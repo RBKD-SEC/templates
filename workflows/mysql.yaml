@@ -9,4 +9,4 @@ info:
 
 workflows:
   - template: network/detection/mysql-detect.yaml
-  - template: network/default-logins/mysql-mini-brute.yaml
+  - template: network/default-login/mysql-mini-brute.yaml

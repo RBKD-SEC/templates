@@ -8,5 +8,5 @@ info:
   tags: workflow,mssql
 
 workflows:
-  - template: network/technologies/mssql-detect.yaml
-  - template: network/default-logins/mssql-mini-brute.yaml
+  - template: network/detection/mssql-detect.yaml
+  - template: network/default-login/mssql-mini-brute.yaml

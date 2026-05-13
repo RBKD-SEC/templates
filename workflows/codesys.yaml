@@ -8,4 +8,4 @@ info:
   tags: workflow,codesys
 
 workflows:
-  - template: network/technologies/codesys-detect.yaml
+  - template: network/detection/codesys-detect.yaml

@@ -8,4 +8,4 @@ info:
   tags: workflow,mms
 
 workflows:
-  - template: network/technologies/mms-detect.yaml
+  - template: network/detection/mms-detect.yaml

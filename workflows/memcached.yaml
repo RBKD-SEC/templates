@@ -8,5 +8,5 @@ info:
   tags: workflow,memcached
 
 workflows:
-  - template: network/technologies/memcached-detect.yaml
-  - template: network/misconfiguration/memcached-unauth.yaml
+  - template: network/detection/memcached-detect.yaml
+  - template: network/misconfig/memcached-unauth.yaml

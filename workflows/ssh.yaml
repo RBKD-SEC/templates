@@ -8,5 +8,5 @@ info:
   tags: workflow,ssh
 
 workflows:
-  - template: network/technologies/ssh-detect.yaml
+  - template: network/detection/ssh-detect.yaml
   - template: javascript/default-logins/ssh-mini-brute.yaml

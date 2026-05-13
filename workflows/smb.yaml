@@ -8,5 +8,5 @@ info:
   tags: workflow,smb
 
 workflows:
-  - template: network/technologies/smb-detect.yaml
-  - template: network/misconfiguration/smb-null-session.yaml
+  - template: network/detection/smb-detect.yaml
+  - template: network/misconfig/smb-null-session.yaml

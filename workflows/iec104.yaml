@@ -8,4 +8,4 @@ info:
   tags: workflow,iec104
 
 workflows:
-  - template: network/technologies/iec104-detect.yaml
+  - template: network/detection/iec104-detect.yaml

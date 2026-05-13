@@ -10,4 +10,4 @@ info:
 workflows:
   - template: http/technologies/kafka-detect.yaml
   - template: http/exposures/kafka-connect-exposed.yaml
-  - template: network/misconfiguration/kafka-unauth.yaml
+  - template: network/misconfig/kafka-unauth.yaml

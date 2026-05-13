@@ -8,4 +8,4 @@ info:
   tags: workflow,elasticsearch
 
 workflows:
-  - template: network/misconfiguration/elasticsearch-no-auth.yaml
+  - template: network/misconfig/elasticsearch-no-auth.yaml
