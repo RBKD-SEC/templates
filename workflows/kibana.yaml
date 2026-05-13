@@ -2,10 +2,10 @@ id: kibana
 
 info:
   name: Kibana Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for kibana. Covers: fingerprint detection.
   tags: workflow,kibana
 
 workflows:
-  - template: fingerprints/http/panels/kibana-detect.yaml
+  - template: http/technologies/kibana-detect.yaml

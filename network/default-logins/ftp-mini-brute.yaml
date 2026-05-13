@@ -9,7 +9,7 @@ info:
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: network,ftp,default-login,service,tcp,internal-audit,optional
+  tags: network,ftp,default-login,service,tcp
 
 tcp:
   - inputs:

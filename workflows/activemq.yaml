@@ -2,7 +2,7 @@ id: activemq
 
 info:
   name: Activemq Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for activemq. Covers: authentication checks.
   tags: workflow,activemq

@@ -2,14 +2,14 @@ id: sangfor-mini-brute
 
 info:
   name: Sangfor Device Mini Brute - 2x2 Dictionary
-  author: internal-audit
+  author: internal
   severity: high
   description: |
     Detects weak/default Sangfor (深信服) device credentials using a minimal 2-user x 2-password dictionary.
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: http,default-login,sangfor,network-device,internal-audit,optional
+  tags: http,default-login,sangfor,network-device
 
 http:
   - raw:

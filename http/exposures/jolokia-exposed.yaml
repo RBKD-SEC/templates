@@ -5,12 +5,12 @@ id: jolokia-exposed
 
 info:
   name: Jolokia Exposed
-  author: pdteam, internal-audit
+  author: pdteam
   severity: medium
   description: Detects exposed Jolokia JMX agent (read-only version probe).
   metadata:
     max-request: 1
-  tags: http,exposure,jolokia,internal-audit,safe
+  tags: http,exposure,jolokia
 
 http:
   - method: GET

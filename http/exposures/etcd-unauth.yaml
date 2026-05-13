@@ -2,12 +2,12 @@ id: etcd-unauth
 
 info:
   name: etcd Unauthenticated Access
-  author: internal-audit
+  author: internal
   severity: critical
   description: Detects etcd server allowing unauthenticated read access to all keys.
   metadata:
     max-request: 1
-  tags: http,exposure,etcd,internal-audit,safe
+  tags: http,exposure,etcd
 
 http:
   - method: GET

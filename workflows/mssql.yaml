@@ -2,11 +2,11 @@ id: mssql
 
 info:
   name: Mssql Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for mssql. Covers: fingerprint detection, authentication checks.
   tags: workflow,mssql
 
 workflows:
-  - template: fingerprints/network/mssql-detect.yaml
+  - template: network/technologies/mssql-detect.yaml
   - template: network/default-logins/mssql-mini-brute.yaml

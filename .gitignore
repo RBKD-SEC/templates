@@ -9,14 +9,7 @@
 .DS_Store
 Thumbs.db
 
-# Nuclei runtime artifacts
-*.json
-*.txt
-!requirements.txt
-result*/
-output*/
-
-# Temp files
+# Temp
 *.tmp
 *.bak
 *.log

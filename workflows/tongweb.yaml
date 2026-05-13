@@ -2,11 +2,11 @@ id: tongweb
 
 info:
   name: Tongweb Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for tongweb. Covers: fingerprint detection, authentication checks.
   tags: workflow,tongweb
 
 workflows:
-  - template: fingerprints/http/middleware/tongweb-detect.yaml
+  - template: http/technologies/tongweb-detect.yaml
   - template: http/default-logins/tongweb-mini-brute.yaml

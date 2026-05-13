@@ -2,7 +2,7 @@ id: kingbase-mini-brute
 
 info:
   name: KingBaseES Mini Brute - 2x2 Dictionary
-  author: internal-audit
+  author: internal
   severity: high
   description: |
     Detects weak/default KingBaseES (人大金仓) credentials using a minimal 2-user x 2-password dictionary.
@@ -10,7 +10,7 @@ info:
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: network,default-login,kingbase,database,internal-audit,optional
+  tags: network,default-login,kingbase,database
 
 javascript:
   - code: |

@@ -2,10 +2,10 @@ id: modbus
 
 info:
   name: Modbus Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for modbus. Covers: fingerprint detection.
   tags: workflow,modbus
 
 workflows:
-  - template: fingerprints/network/ics/modbus-detect.yaml
+  - template: network/technologies/modbus-detect.yaml

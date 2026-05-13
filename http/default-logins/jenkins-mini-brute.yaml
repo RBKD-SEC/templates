@@ -2,14 +2,14 @@ id: jenkins-mini-brute
 
 info:
   name: Jenkins Mini Brute - 2x2 Dictionary
-  author: internal-audit
+  author: internal
   severity: high
   description: |
     Detects weak/default Jenkins credentials using a minimal 2-user x 2-password dictionary.
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: http,default-login,jenkins,devops,internal-audit,optional
+  tags: http,default-login,jenkins,devops
 
 http:
   - raw:

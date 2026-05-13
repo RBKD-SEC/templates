@@ -5,12 +5,12 @@ id: spring-boot-actuator-exposed
 
 info:
   name: Spring Boot Actuator Exposed
-  author: pdteam, internal-audit
+  author: pdteam
   severity: medium
   description: Detects exposed Spring Boot actuator endpoints (read-only probe).
   metadata:
     max-request: 2
-  tags: http,exposure,spring-boot,actuator,internal-audit,safe
+  tags: http,exposure,spring-boot,actuator
 
 http:
   - method: GET

@@ -2,7 +2,7 @@ id: druid
 
 info:
   name: Druid Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for druid. Covers: security exposure checks.
   tags: workflow,druid

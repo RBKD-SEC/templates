@@ -2,14 +2,14 @@ id: mysql-mini-brute
 
 info:
   name: MySQL Mini Brute - 2x2 Dictionary
-  author: internal-audit
+  author: internal
   severity: high
   description: |
     Detects weak/default MySQL credentials using a minimal 2-user x 2-password dictionary.
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: network,mysql,default-login,database,internal-audit,optional
+  tags: network,mysql,default-login,database
 
 javascript:
   - code: |

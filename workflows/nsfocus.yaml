@@ -2,11 +2,11 @@ id: nsfocus
 
 info:
   name: Nsfocus Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for nsfocus. Covers: fingerprint detection, authentication checks.
   tags: workflow,nsfocus
 
 workflows:
-  - template: fingerprints/http/network-devices/nsfocus-detect.yaml
+  - template: http/technologies/nsfocus-detect.yaml
   - template: http/default-logins/nsfocus-mini-brute.yaml

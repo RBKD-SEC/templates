@@ -2,11 +2,11 @@ id: postgres
 
 info:
   name: Postgres Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for postgres. Covers: fingerprint detection, authentication checks.
   tags: workflow,postgres
 
 workflows:
-  - template: fingerprints/network/postgres-detect.yaml
+  - template: network/technologies/postgres-detect.yaml
   - template: network/default-logins/postgres-mini-brute.yaml

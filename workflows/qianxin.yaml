@@ -2,11 +2,11 @@ id: qianxin
 
 info:
   name: Qianxin Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for qianxin. Covers: fingerprint detection, authentication checks.
   tags: workflow,qianxin
 
 workflows:
-  - template: fingerprints/http/network-devices/qianxin-detect.yaml
+  - template: http/technologies/qianxin-detect.yaml
   - template: http/default-logins/qianxin-mini-brute.yaml

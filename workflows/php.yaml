@@ -2,7 +2,7 @@ id: php
 
 info:
   name: Php Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for php. Covers: security exposure checks, authentication checks.
   tags: workflow,php

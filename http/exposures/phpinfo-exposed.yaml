@@ -5,12 +5,12 @@ id: phpinfo-exposed
 
 info:
   name: phpinfo Exposed
-  author: pdteam, internal-audit
+  author: pdteam
   severity: medium
   description: Detects exposed phpinfo.php page.
   metadata:
     max-request: 2
-  tags: http,exposure,phpinfo,sensitive-files,internal-audit,safe
+  tags: http,exposure,phpinfo,sensitive-files
 
 http:
   - method: GET

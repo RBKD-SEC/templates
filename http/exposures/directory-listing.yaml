@@ -5,12 +5,12 @@ id: directory-listing
 
 info:
   name: Directory Listing Enabled
-  author: pdteam, internal-audit
+  author: pdteam
   severity: low
   description: Detects enabled directory listing on web server.
   metadata:
     max-request: 1
-  tags: http,exposure,misconfig,internal-audit,safe
+  tags: http,exposure,misconfig
 
 http:
   - method: GET

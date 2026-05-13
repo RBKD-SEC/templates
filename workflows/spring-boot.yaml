@@ -2,12 +2,12 @@ id: spring-boot
 
 info:
   name: Spring Boot Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for spring-boot. Covers: fingerprint detection, security exposure checks.
   tags: workflow,spring-boot
 
 workflows:
-  - template: fingerprints/http/middleware/spring-boot-detect.yaml
+  - template: http/technologies/spring-boot-detect.yaml
   - template: http/exposures/spring-boot-actuator-exposed.yaml
   - template: http/exposures/swagger-ui-exposed.yaml

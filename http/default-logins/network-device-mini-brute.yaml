@@ -10,7 +10,7 @@ info:
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: http,default-login,network-device,internal-audit,optional
+  tags: http,default-login,network-device
 
 http:
   - raw:
