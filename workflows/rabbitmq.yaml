@@ -2,7 +2,7 @@ id: rabbitmq
 
 info:
   name: Rabbitmq Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for rabbitmq. Covers: authentication checks.
   tags: workflow,rabbitmq

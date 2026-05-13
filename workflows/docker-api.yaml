@@ -2,7 +2,7 @@ id: docker-api
 
 info:
   name: Docker Api Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for docker-api. Covers: security exposure checks.
   tags: workflow,docker-api

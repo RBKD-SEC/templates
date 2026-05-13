@@ -2,7 +2,7 @@ id: consul
 
 info:
   name: Consul Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for consul. Covers: security exposure checks.
   tags: workflow,consul

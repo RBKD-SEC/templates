@@ -2,11 +2,11 @@ id: apusic
 
 info:
   name: Apusic Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for apusic. Covers: fingerprint detection, authentication checks.
   tags: workflow,apusic
 
 workflows:
-  - template: fingerprints/http/middleware/apusic-detect.yaml
+  - template: http/technologies/apusic-detect.yaml
   - template: http/default-logins/apusic-mini-brute.yaml

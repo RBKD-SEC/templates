@@ -2,11 +2,11 @@ id: ge
 
 info:
   name: Ge Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for ge. Covers: fingerprint detection, authentication checks.
   tags: workflow,ge
 
 workflows:
-  - template: fingerprints/http/ics/ge-detect.yaml
+  - template: http/technologies/ge-detect.yaml
   - template: http/default-logins/ge-mini-brute.yaml

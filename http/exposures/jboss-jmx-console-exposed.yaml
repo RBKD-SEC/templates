@@ -2,12 +2,12 @@ id: jboss-jmx-console-exposed
 
 info:
   name: JBoss JMX Console Exposed
-  author: internal-audit
+  author: internal
   severity: medium
   description: Detects JBoss JMX console accessible without authentication.
   metadata:
     max-request: 1
-  tags: http,exposure,jboss,jmx,internal-audit,safe
+  tags: http,exposure,jboss,jmx
 
 http:
   - method: GET

@@ -2,7 +2,7 @@ id: kubernetes
 
 info:
   name: Kubernetes Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for kubernetes. Covers: security exposure checks.
   tags: workflow,kubernetes

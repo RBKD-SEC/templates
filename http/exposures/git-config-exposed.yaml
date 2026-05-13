@@ -5,12 +5,12 @@ id: git-config-exposed
 
 info:
   name: Git Config Exposed
-  author: pdteam, internal-audit
+  author: pdteam
   severity: medium
   description: Detects exposed .git/config file.
   metadata:
     max-request: 1
-  tags: http,exposure,git,sensitive-files,internal-audit,safe
+  tags: http,exposure,git,sensitive-files
 
 http:
   - method: GET

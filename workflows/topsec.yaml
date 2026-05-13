@@ -2,11 +2,11 @@ id: topsec
 
 info:
   name: Topsec Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for topsec. Covers: fingerprint detection, authentication checks.
   tags: workflow,topsec
 
 workflows:
-  - template: fingerprints/http/network-devices/topsec-detect.yaml
+  - template: http/technologies/topsec-detect.yaml
   - template: http/default-logins/topsec-mini-brute.yaml

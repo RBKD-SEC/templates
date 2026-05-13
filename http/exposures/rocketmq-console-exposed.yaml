@@ -2,12 +2,12 @@ id: rocketmq-console-exposed
 
 info:
   name: RocketMQ Console Exposed
-  author: internal-audit
+  author: internal
   severity: medium
   description: Detects RocketMQ Console allowing unauthenticated access.
   metadata:
     max-request: 1
-  tags: http,exposure,rocketmq,internal-audit,safe
+  tags: http,exposure,rocketmq
 
 http:
   - method: GET

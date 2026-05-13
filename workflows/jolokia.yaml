@@ -2,7 +2,7 @@ id: jolokia
 
 info:
   name: Jolokia Scan
-  author: internal-audit
+  author: internal
   description: |
     Service-specific scan for jolokia. Covers: security exposure checks.
   tags: workflow,jolokia

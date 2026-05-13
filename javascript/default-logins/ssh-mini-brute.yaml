@@ -10,7 +10,7 @@ info:
     MAX 4 ATTEMPTS. Stops at first match.
   metadata:
     max-request: 4
-  tags: js,ssh,default-login,network,internal-audit,optional
+  tags: js,ssh,default-login,network
 
 javascript:
   - pre-condition: |

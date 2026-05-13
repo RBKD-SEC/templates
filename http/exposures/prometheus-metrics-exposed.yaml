@@ -5,12 +5,12 @@ id: prometheus-metrics-exposed
 
 info:
   name: Prometheus Metrics Exposed
-  author: pdteam, internal-audit
+  author: pdteam
   severity: medium
   description: Detects exposed Prometheus metrics endpoint.
   metadata:
     max-request: 1
-  tags: http,exposure,prometheus,internal-audit,safe
+  tags: http,exposure,prometheus
 
 http:
   - method: GET

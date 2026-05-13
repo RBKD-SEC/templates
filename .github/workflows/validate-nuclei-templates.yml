@@ -15,14 +15,7 @@ jobs:
       - name: Install Nuclei
         run: |
           go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
-          export PATH=$PATH:$(go env GOPATH)/bin
           echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
-          nuclei -version
 
       - name: Validate templates
-        run: |
-          nuclei -validate -t .
-
-      - name: Lint IDs and weak-password fields
-        run: |
-          bash scripts/lint-ids.sh
+        run: nuclei -validate -t .

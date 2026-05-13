@@ -5,12 +5,12 @@ id: swagger-ui-exposed
 
 info:
   name: Swagger UI Exposed
-  author: pdteam, internal-audit
+  author: pdteam
   severity: medium
   description: Detects exposed Swagger UI or OpenAPI documentation.
   metadata:
     max-request: 2
-  tags: http,exposure,swagger,openapi,internal-audit,safe
+  tags: http,exposure,swagger,openapi
 
 http:
   - method: GET
